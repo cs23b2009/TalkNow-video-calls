@@ -18,7 +18,7 @@
 <h2>📸 Project Screenshot</h2>
 
 <p align="center">
-  <img src="frontend/public/All Devices Black Mockup.png" alt="TalkNow App Mockup" width="1200" height="550" />
+  <img src="frontend/public/All Devices Black Mockup.png" alt="TalkNow App Mockup" width="1200" height="500" />
 </p>
 
 ---

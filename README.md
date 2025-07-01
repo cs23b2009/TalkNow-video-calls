@@ -15,10 +15,11 @@
 
 ---
 
-<h2>📸 Project Screenshots</h2>
+<h2>📸 Project Screenshot</h2>
 
-<img src="https://your-screenshot-url.com/screenshot1.png" alt="Home Page Screenshot" width="600" height="400" />
-<!-- Add more screenshots if needed -->
+<p align="center">
+  <img src="frontend/public/All Devices Black Mockup.png" alt="TalkNow App Mockup" width="1200" height="550" />
+</p>
 
 ---
 

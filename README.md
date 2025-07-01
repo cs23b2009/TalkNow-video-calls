@@ -92,6 +92,17 @@ npm run dev
 </code></pre>
 
 ---
+## 🧠 System Architecture
+
+![System Architecture](https://github.com/cs23b2009/blahblah/blob/main/TalkNow_Arcitecture.jpeg)
+
+---
+
+## 🗃️ Database Schema
+
+![Database Schema](https://github.com/cs23b2009/blahblah/blob/main/TalkNow_%20Database%20Schema.png)
+
+---
 
 <h2>🧪 Technologies Used</h2>
 

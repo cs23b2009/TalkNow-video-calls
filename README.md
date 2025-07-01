@@ -4,9 +4,7 @@
   <img src="https://socialify.git.ci/cs23b2009/TalkNow-video-calls/image?custom_description=A+full-stack+video+calling+and+messaging+application+built+with+React%2C+Node.js%2C+Stream+SDK%2C+and+Tailwind+CSS.&description=1&language=1&name=1&owner=1&theme=Light" alt="project-image">
 </p>
 
-<p align="center">
-  A full-stack video calling and messaging application built with React, Node.js, Stream SDK, and Tailwind CSS.
-</p>
+
 
 <p align="center">
   <img src="https://img.shields.io/github/license/cs23b2009/TalkNow-video-calls" alt="License Badge">

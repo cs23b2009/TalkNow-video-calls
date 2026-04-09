@@ -4,8 +4,6 @@
   <img src="https://socialify.git.ci/cs23b2009/TalkNow-video-calls/image?custom_description=A+full-stack+video+calling+and+messaging+application+built+with+React%2C+Node.js%2C+Stream+SDK%2C+and+Tailwind+CSS.&description=1&language=1&name=1&owner=1&theme=Light" alt="project-image">
 </p>
 
-
-
 <p align="center">
   <img src="https://img.shields.io/github/license/cs23b2009/TalkNow-video-calls" alt="License Badge">
 </p>
@@ -25,16 +23,23 @@
 
 <h2>✨ Features</h2>
 
-- Real-time Video Calling  
-- Group Messaging  
-- Friend Requests  
-- Online/Offline Status  
-- Responsive Design  
-- Sleek Glassmorphism UI  
+- **Real-time Video Calling**: High-quality peer-to-peer and group calls powered by Stream SDK.
+- **Instant Messaging**: Real-time chat with online status tracking.
+- **Email Verification**: Secure signup flow with Mailjet verification codes.
+- **User Profiles**: Onboarding flow and customizable profiles.
+- **Friend System**: Connect with other students globally.
+- **Dark Mode & Themes**: Multiple UI themes for a personalized experience.
 
 ---
 
-<h2>🛠 Installation Steps</h2>
+<h2>🚀 Deployment</h2>
+
+For full production deployment steps (Vercel & Render), please refer to the:
+👉 **[Deployment Guide (DEPLOYMENT.md)](./DEPLOYMENT.md)**
+
+---
+
+<h2>🛠 Local Installation</h2>
 
 <h3>1️⃣ Clone the Repository</h3>
 
@@ -56,79 +61,51 @@ npm install
 
 ---
 
-<h2>🧪 .env Setup</h2>
+<h2>🧪 Environment Variables (.env)</h2>
 
-<h3>📂 Backend (<code>/backend</code>)</h3>
+<h3>📂 Backend (<code>/backend/.env</code>)</h3>
 
-<pre><code>
-PORT=5001
+<pre><code>PORT=5001
 MONGO_URI=your_mongo_uri
-STEAM_API_KEY=your_steam_api_key
-STEAM_API_SECRET=your_steam_api_secret
 JWT_SECRET_KEY=your_jwt_secret
-NODE_ENV=development
+STEAM_API_KEY=your_stream_api_key
+STEAM_API_SECRET=your_stream_api_secret
+MAILJET_API_KEY=your_mailjet_key
+MAILJET_SECRET_KEY=your_mailjet_secret
+MAILJET_FROM_EMAIL=your_verified_email
+CLIENT_URL=http://localhost:5173
 </code></pre>
 
-<h3>🌐 Frontend (<code>/frontend</code>)</h3>
+<h3>🌐 Frontend (<code>/frontend/.env</code>)</h3>
 
-<pre><code>
-VITE_STREAM_API_KEY=your_stream_api_key
-</code></pre>
-
----
-
-<h2>🔧 Run the Backend</h2>
-
-<pre><code>cd backend
-npm install
-npm run dev
-</code></pre>
-
-<h2>💻 Run the Frontend</h2>
-
-<pre><code>cd frontend
-npm install
-npm run dev
+<pre><code>VITE_STREAM_API_KEY=your_stream_api_key
+VITE_BACKEND_URL=http://localhost:5001
 </code></pre>
 
 ---
-## 🧠 System Architecture
+
+<h2>💻 Running Locally</h2>
+
+1. **Start Backend**:
+   <pre><code>cd backend && npm run dev</code></pre>
+2. **Start Frontend**:
+   <pre><code>cd frontend && npm run dev</code></pre>
+
+---
+
+<h2>🧠 System Architecture</h2>
 
 ![System Architecture](https://github.com/cs23b2009/blahblah/blob/main/TalkNow_Arcitecture.jpeg)
-
----
-
-## 🗃️ Database Schema
-
-![Database Schema](https://github.com/cs23b2009/blahblah/blob/main/TalkNow_%20Database%20Schema.png)
 
 ---
 
 <h2>🧪 Technologies Used</h2>
 
 <p align="left">
-  <a href="https://react.dev/" target="_blank" rel="noreferrer">
-    <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" alt="React" />
-  </a>
-  <a href="https://vitejs.dev/" target="_blank" rel="noreferrer">
-    <img src="https://img.shields.io/badge/Vite-563D7C?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
-  </a>
-  <a href="https://tailwindcss.com/" target="_blank" rel="noreferrer">
-    <img src="https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" alt="Tailwind CSS" />
-  </a>
-  <a href="https://getstream.io/" target="_blank" rel="noreferrer">
-    <img src="https://img.shields.io/badge/Stream-0085FF?style=for-the-badge&logo=stream&logoColor=white" alt="Stream" />
-  </a>
-  <a href="https://nodejs.org/" target="_blank" rel="noreferrer">
-    <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" alt="Node.js" />
-  </a>
-  <a href="https://expressjs.com/" target="_blank" rel="noreferrer">
-    <img src="https://img.shields.io/badge/Express.js-000000?style=for-the-badge&logo=express&logoColor=white" alt="Express.js" />
-  </a>
-  <a href="https://www.mongodb.com/" target="_blank" rel="noreferrer">
-    <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" alt="MongoDB" />
-  </a>
-  <a href="https://jwt.io/" target="_blank" rel="noreferrer">
-    <img src="https://img.shields.io/badge/JWT-000000?style=for-the-badge&logo=JSON%20web%20tokens&logoColor=white" alt="JWT" />
-  </a>
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
+  <img src="https://img.shields.io/badge/Vite-563D7C?style=for-the-badge&logo=vite&logoColor=white" />
+  <img src="https://img.shields.io/badge/TailwindCSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white" />
+  <img src="https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white" />
+  <img src="https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge&logo=mongodb&logoColor=white" />
+  <img src="https://img.shields.io/badge/Mailjet-FF9900?style=for-the-badge&logo=mailjet&logoColor=white" />
 </p>

@@ -22,7 +22,7 @@ This guide covers the step-by-step process for deploying the TalkNow full-stack 
     *   `MAILJET_SECRET_KEY`: `...` (Mailjet Secret)
     *   `MAILJET_FROM_EMAIL`: `indrakumarai369@gmail.com`
     *   `NODE_ENV`: `production`
-    *   `CLIENT_URL`: `https://your-vercel-frontend-url.vercel.app` (Update this after frontend deployment)
+    *   `CLIENT_URL`: `https://talk-now-video-calls.vercel.app` (Your Vercel URL)
 
 ## 🎨 2. Frontend Deployment (Vercel)
 
@@ -36,7 +36,7 @@ This guide covers the step-by-step process for deploying the TalkNow full-stack 
 3.  **Environment Variables**:
     Add these in the Vercel dashboard:
     *   `VITE_STREAM_API_KEY`: `...` (Same as backend)
-    *   `VITE_BACKEND_URL`: `https://your-render-backend-url.onrender.com` (Your Render service URL)
+    *   `VITE_BACKEND_URL`: `https://talknow-video-calls.onrender.com` (Your Render service URL)
 
 ---
 

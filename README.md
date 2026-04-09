@@ -8,7 +8,7 @@
   <img src="https://img.shields.io/github/license/cs23b2009/TalkNow-video-calls" alt="License Badge">
 </p>
 <p align="center">
-  🌐 <strong>Website:</strong> <a href="https://talknow-video-calls-2.onrender.com" target="_blank">https://talknow-video-calls-2.onrender.com</a>
+  🌐 <strong>Website:</strong> <a href="https://talk-now-video-calls.vercel.app" target="_blank">https://talk-now-video-calls.vercel.app</a>
 </p>
 
 ---

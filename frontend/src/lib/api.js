@@ -29,6 +29,11 @@ export const completeOnboarding = async (userData) => {
   return response.data;
 };
 
+export const updateProfile = async (userData) => {
+  const response = await axiosInstance.put("/auth/update-profile", userData);
+  return response.data;
+};
+
 export async function getUserFriends() {
   const response = await axiosInstance.get("/users/friends");
   return response.data;
@@ -61,5 +66,10 @@ export async function acceptFriendRequest(requestId) {
 
 export async function getStreamToken() {
   const response = await axiosInstance.get("/chat/token");
+  return response.data;
+}
+
+export async function notifyUser(recipientId, type) {
+  const response = await axiosInstance.post("/users/notify", { recipientId, type });
   return response.data;
 }

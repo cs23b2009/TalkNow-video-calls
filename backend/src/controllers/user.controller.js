@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import FriendRequest from "../models/FriendRequest.js";
+import { sendFriendRequestEmail, sendNotificationEmail } from "../lib/mailjet.js";
 
 export async function getRecommendedUsers(req, res) {
   try {
@@ -72,6 +73,14 @@ export async function sendFriendRequest(req, res) {
       recipient: recipientId,
     });
 
+    // Notify recipient
+    try {
+      const sender = await User.findById(myId);
+      await sendFriendRequestEmail(recipient.email, recipient.fullName, sender.fullName);
+    } catch (mailError) {
+      console.log("Friend request email error:", mailError.message);
+    }
+
     res.status(201).json(friendRequest);
   } catch (error) {
     console.error("Error in sendFriendRequest controller", error.message);
@@ -106,6 +115,20 @@ export async function acceptFriendRequest(req, res) {
     await User.findByIdAndUpdate(friendRequest.recipient, {
       $addToSet: { friends: friendRequest.sender },
     });
+
+    // Notify original sender
+    try {
+      const sender = await User.findById(friendRequest.sender);
+      const recipient = await User.findById(friendRequest.recipient);
+      await sendNotificationEmail(
+        sender.email,
+        sender.fullName,
+        "Friend Request Accepted!",
+        `${recipient.fullName} accepted your friend request on TalkNow.`
+      );
+    } catch (mailError) {
+      console.log("Request acceptance email error:", mailError.message);
+    }
 
     res.status(200).json({ message: "Friend request accepted" });
   } catch (error) {
@@ -143,6 +166,34 @@ export async function getOutgoingFriendReqs(req, res) {
     res.status(200).json(outgoingRequests);
   } catch (error) {
     console.log("Error in getOutgoingFriendReqs controller", error.message);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+}
+
+export async function sendEmailNotification(req, res) {
+  try {
+    const { recipientId, type } = req.body;
+    const sender = req.user;
+
+    const recipient = await User.findById(recipientId);
+    if (!recipient) return res.status(404).json({ message: "Recipient not found" });
+
+    let title, message;
+    if (type === "message") {
+      title = "New Message on TalkNow";
+      message = `${sender.fullName} sent you a new message. Join the conversation!`;
+    } else if (type === "call") {
+      title = "Incoming Video Call";
+      message = `${sender.fullName} is calling you on TalkNow! Hop on to the app to answer.`;
+    } else {
+      return res.status(400).json({ message: "Invalid notification type" });
+    }
+
+    await sendNotificationEmail(recipient.email, recipient.fullName, title, message);
+
+    res.status(200).json({ success: true, message: "Notification email sent" });
+  } catch (error) {
+    console.error("Error sending user notification:", error.message);
     res.status(500).json({ message: "Internal Server Error" });
   }
 }

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import useAuthUser from "../hooks/useAuthUser";
 import { useQuery } from "@tanstack/react-query";
-import { getStreamToken } from "../lib/api";
+import { getStreamToken, notifyUser } from "../lib/api";
 
 import {
   Channel,
@@ -67,8 +67,21 @@ const ChatPage = () => {
 
         await currChannel.watch();
 
+        // Listen for new messages to trigger email notifications
+        const listener = currChannel.on("message.new", (event) => {
+          // Only notify if THE CURRENT USER is the sender (notifying the receiver)
+          if (event.user.id === authUser._id) {
+            notifyUser(targetUserId, "message").catch(err => console.log("Notification error:", err));
+          }
+        });
+
         setChatClient(client);
         setChannel(currChannel);
+
+        return () => {
+          listener.unsubscribe();
+          client.disconnectUser();
+        };
       } catch (error) {
         console.error("Error initializing chat:", error);
         toast.error("Could not connect to chat. Please try again.");
@@ -87,6 +100,9 @@ const ChatPage = () => {
       channel.sendMessage({
         text: `I've started a video call. Join me here: ${callUrl}`,
       });
+
+      // Send email notification for the call
+      notifyUser(targetUserId, "call").catch(err => console.log("Call notification error:", err));
 
       toast.success("Video call link sent successfully!");
     }

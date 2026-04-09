@@ -1,5 +1,5 @@
 import express from "express";
-import { login, logout, onboard, signup } from "../controllers/auth.controller.js";
+import { login, logout, onboard, signup, updateProfile, verifyEmail, resendCode } from "../controllers/auth.controller.js";
 import { protectRoute } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
@@ -9,6 +9,9 @@ router.post("/login", login);
 router.post("/logout", logout);
 
 router.post("/onboarding", protectRoute, onboard);
+router.put("/update-profile", protectRoute, updateProfile);
+router.post("/verify-email", protectRoute, verifyEmail);
+router.post("/resend-code", protectRoute, resendCode);
 
 // check if user is logged in
 router.get("/me", protectRoute, (req, res) => {

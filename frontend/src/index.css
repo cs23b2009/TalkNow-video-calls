@@ -2,12 +2,65 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  .glass-card {
+    @apply bg-base-100/40 backdrop-blur-2xl border border-white/10 shadow-[0_8px_32px_0_rgba(0,0,0,0.1)];
+  }
+
+  .glass-card-premium {
+    @apply bg-white/5 backdrop-blur-3xl border border-white/20 shadow-2xl relative overflow-hidden;
+  }
+
+  .premium-gradient-bg {
+    background: linear-gradient(-45deg, hsla(var(--p)/0.2), hsla(var(--s)/0.15), hsla(var(--a)/0.2), hsla(var(--n)/0.1));
+    background-size: 400% 400%;
+    animation: gradient-flow 15s ease infinite;
+    background-attachment: fixed;
+  }
+
+  .active-nav-indicator {
+    @apply absolute left-0 w-1 h-2/3 top-1/2 -translate-y-1/2 rounded-r-full bg-primary shadow-[0_0_15px_hsla(var(--p)/0.8)];
+  }
+
+  .glow-on-hover:hover {
+    @apply border-primary/40 shadow-[0_0_20px_hsla(var(--p)/0.2)];
+    transform: translateY(-1px);
+  }
+}
+
+@keyframes gradient-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Custom scrollbar for premium feel */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-base-content/10 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-base-content/20;
+}
 
 .str-chat__channel {
   display: flex;
   align-items: center;
   justify-content: center;
-  background:  0%;
+  background: transparent;
   height: 100%;
   box-sizing: border-box;
 }
@@ -17,27 +70,15 @@
   width: 100%;
   height: 80% !important;
   margin: 0 auto !important;
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  box-sizing: border-box;
+  @apply glass-card rounded-2xl overflow-hidden;
 }
 
 .str-chat__list {
-  background:  0%;
+  background: transparent;
   padding: 12px;
   box-sizing: border-box;
 }
 
 .str-chat__message-input {
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-    border-radius: 0 0 8px 8px;
+  @apply border-t border-white/10 bg-base-100/40 backdrop-blur-md rounded-b-2xl;
 }

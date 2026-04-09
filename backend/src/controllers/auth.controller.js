@@ -1,4 +1,3 @@
-import { upsertStreamUser, generateStreamToken } from "../lib/stream.js";
 import User from "../models/User.js";
 import jwt from "jsonwebtoken";
 import { sendVerificationEmail } from "../lib/mailjet.js";
@@ -44,16 +43,6 @@ export async function signup(req, res) {
       console.log("Error sending verification email:", mailError.message);
     }
 
-    try {
-      await upsertStreamUser({
-        id: newUser._id.toString(),
-        name: newUser.fullName,
-        image: newUser.profilePic || "",
-      });
-      console.log(`Stream user created for ${newUser.fullName}`);
-    } catch (error) {
-      console.log("Error creating Stream user:", error);
-    }
 
     const token = jwt.sign({ userId: newUser._id }, process.env.JWT_SECRET_KEY, {
       expiresIn: "7d",
@@ -66,9 +55,7 @@ export async function signup(req, res) {
       secure: process.env.NODE_ENV === "production",
     });
 
-    const streamToken = generateStreamToken(newUser._id);
-
-    res.status(201).json({ success: true, user: newUser, streamToken });
+    res.status(201).json({ success: true, user: newUser });
   } catch (error) {
     console.log("Error in signup controller", error);
     res.status(500).json({ message: "Internal Server Error" });
@@ -100,9 +87,7 @@ export async function login(req, res) {
       secure: process.env.NODE_ENV === "production",
     });
 
-    const streamToken = generateStreamToken(user._id);
-
-    res.status(200).json({ success: true, user, streamToken });
+    res.status(200).json({ success: true, user });
   } catch (error) {
     console.log("Error in login controller", error.message);
     res.status(500).json({ message: "Internal Server Error" });
@@ -148,16 +133,6 @@ export async function onboard(req, res) {
 
     if (!updatedUser) return res.status(404).json({ message: "User not found" });
 
-    try {
-      await upsertStreamUser({
-        id: updatedUser._id.toString(),
-        name: updatedUser.fullName,
-        image: updatedUser.profilePic || "",
-      });
-      console.log(`Stream user updated after onboarding for ${updatedUser.fullName}`);
-    } catch (streamError) {
-      console.log("Error updating Stream user during onboarding:", streamError.message);
-    }
 
     res.status(200).json({ success: true, user: updatedUser });
   } catch (error) {
@@ -186,16 +161,6 @@ export async function updateProfile(req, res) {
 
     if (!updatedUser) return res.status(404).json({ message: "User not found" });
 
-    // Update Stream user
-    try {
-      await upsertStreamUser({
-        id: updatedUser._id.toString(),
-        name: updatedUser.fullName,
-        image: updatedUser.profilePic || "",
-      });
-    } catch (streamError) {
-      console.log("Error updating Stream user:", streamError.message);
-    }
 
     res.status(200).json({ success: true, user: updatedUser });
   } catch (error) {

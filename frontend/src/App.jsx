@@ -17,10 +17,52 @@ import Layout from "./components/Layout.jsx";
 import { useThemeStore } from "./store/useThemeStore.js";
 import FriendsPage from "./pages/FriendsPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
+import { useSocket } from "./context/SocketContext.jsx";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
+import { PhoneCall } from "lucide-react";
+import { useNavigate } from "react-router";
 
 const App = () => {
   const { isLoading, authUser } = useAuthUser();
   const { theme } = useThemeStore();
+  const { socket } = useSocket();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!socket) return;
+
+    socket.on("incoming:call", ({ from, offer }) => {
+      toast((t) => (
+        <div className="flex items-center gap-3">
+          <div className="bg-primary/20 p-2 rounded-full text-primary">
+            <PhoneCall size={20} />
+          </div>
+          <div className="flex-1">
+            <p className="font-bold text-sm">Incoming Call</p>
+            <p className="text-xs opacity-70">User is calling you...</p>
+          </div>
+          <div className="flex gap-2">
+            <button 
+              onClick={() => {
+                toast.dismiss(t.id);
+                const callId = [authUser._id, from].sort().join("-");
+                navigate(`/call/${callId}`);
+              }}
+              className="btn btn-primary btn-xs"
+            >
+              Join
+            </button>
+            <button onClick={() => toast.dismiss(t.id)} className="btn btn-ghost btn-xs">
+              Decline
+            </button>
+          </div>
+        </div>
+      ), { duration: 10000 });
+    });
+
+    return () => socket.off("incoming:call");
+  }, [socket, authUser, navigate]);
 
   const isAuthenticated = Boolean(authUser);
   const isVerified = authUser?.isVerified;

@@ -21,7 +21,7 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.13.2",
     "node-mailjet": "^6.0.11",
-    "stream-chat": "^8.60.0"
+    "socket.io": "^4.8.3"
   },
   "devDependencies": {
     "jest": "^29.7.0",

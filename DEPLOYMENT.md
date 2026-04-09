@@ -69,3 +69,21 @@ CLIENT_URL="http://localhost:5173"
 VITE_STREAM_API_KEY="your_stream_key"
 VITE_BACKEND_URL="http://localhost:5001"
 ```
+
+---
+
+## 🛠️ Troubleshooting
+
+### 1. MongoDB Connection Error (`MongooseServerSelectionError`)
+If you see this in your Render logs, it means MongoDB is blocking Render's IP address.
+**Solution**: 
+1. Go to your **MongoDB Atlas** dashboard.
+2. Under **Security**, click **Network Access**.
+3. Click **Add IP Address**.
+4. Choose **Allow Access From Anywhere** (IP `0.0.0.0/0`).
+5. Wait for it to deploy and restart your Render service.
+
+### 2. CORS Errors in Browser
+If your frontend cannot talk to your backend:
+1. Ensure `CLIENT_URL` in Render is set to your **exact** Vercel URL (e.g., `https://talk-now-video-calls.vercel.app`).
+2. Ensure `VITE_BACKEND_URL` in Vercel is set to your **exact** Render URL.

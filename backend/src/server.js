@@ -19,11 +19,19 @@ app.use(
   cors({
     origin: process.env.CLIENT_URL || "http://localhost:5173",
     credentials: true, // allow frontend to send cookies
-  })
+  }),
 );
 
 app.use(express.json({ limit: "50mb" }));
 app.use(cookieParser());
+
+app.get("/health", (req, res) => {
+  res.status(200).json({
+    success: true,
+    message: "Server is healthy",
+    timestamp: new Date().toISOString(),
+  });
+});
 
 // routes
 app.use("/api/auth", authRoutes);
